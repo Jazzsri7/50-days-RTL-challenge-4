@@ -1,0 +1,15 @@
+module Full_adder(a,b,cin,sum,cout);
+	input a,b,cin;
+	output sum,cout;
+	wire w1,w2,w3;
+	Half_adder HA1 (.a(a),.b(b),.sum(w1),.cout(w2));
+	Half_adder HA2 (.a(w1),.b(cin),.sum(sum),.cout(w3));
+	or or1(cout,w2,w3);
+endmodule
+
+module Half_adder(a,b,sum,cout);
+	input a,b;
+	output sum,cout;
+	assign sum = a^b;
+	assign cout = a & b;
+endmodule
