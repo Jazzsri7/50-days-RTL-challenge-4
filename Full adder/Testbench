@@ -1,0 +1,29 @@
+module Full_adder_tb();
+	reg a,b,cin;
+	wire sum,cout;
+	integer i,j,k;
+	
+	Full_adder DUT (.a(a),.b(b),.cin(cin),.sum(sum),.cout(cout));
+	
+	initial
+		begin
+			{a,b,cin}=0;
+		end
+	
+	initial 
+		begin
+			for(i=0;i<8;i=i+1)
+				begin
+				a=i;
+					for(j=0;j<8;j=j+1)
+					begin
+					   b=j;
+						 for (k=0;k<8;k=k+1)
+						 begin
+						  cin=k;
+						  #10;
+						 end
+				    end
+				end
+		end
+endmodule 			 
