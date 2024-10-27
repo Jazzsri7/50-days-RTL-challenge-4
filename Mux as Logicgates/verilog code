@@ -1,0 +1,14 @@
+module mux_as_logicgates(input A,B,output [5:0] Y);
+
+mux_2to1 m1(.a(0),.b(B),.sel(A),.y(Y[0])); //AND gate
+mux_2to1 m2(.a(B),.b(1),.sel(A),.y(Y[1])); //OR gate
+mux_2to1 m3(.a(1),.b(~B),.sel(A),.y(Y[2])); //NAND gate
+mux_2to1 m4(.a(~B),.b(0),.sel(A),.y(Y[3])); //NOR gate
+mux_2to1 m5(.a(B),.b(~B),.sel(A),.y(Y[4])); //EX-OR gate
+mux_2to1 m6(.a(~B),.b(B),.sel(A),.y(Y[5])); //EX-NOR gate
+
+endmodule
+
+module mux_2to1(input a,b,sel,output y);
+	assign y = (sel)?b:a;
+endmodule
