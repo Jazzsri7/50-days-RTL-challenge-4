@@ -1,0 +1,25 @@
+module mux_as_logicgates_tb();
+reg A,B;
+wire [5:0] Y;
+integer i,j;
+mux_as_logicgates DUT(.A(A),.B(B),.Y(Y));
+
+initial
+begin
+	A=1;
+	B=0;
+	#10;
+	
+	for(i=0;i<2;i=i+1)
+	begin
+		A=i;
+		for(j=0;j<2;j=j+1)
+		begin
+			B=j;
+			#10;
+			$display("value of A=%b,B=%b,Y=%b",A,B,Y);
+		end
+		
+	end		
+end
+endmodule 
