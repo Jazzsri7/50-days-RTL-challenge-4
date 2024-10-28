@@ -1,0 +1,27 @@
+module ring_counter_tb();
+reg clock;
+reg reset;
+wire [3:0] Q; 
+
+ring_counter DUT(.clock(clock),.reset(reset),.Q(Q));
+
+initial 
+begin
+	clock=1'b1;
+	forever #5 clock=~clock;
+end
+
+initial 
+begin
+	reset=1;
+	#20;
+	reset=0;
+	#200;
+	$finish;
+end
+
+initial
+begin 
+	$monitor("value of Q=%b",Q);
+end
+endmodule
