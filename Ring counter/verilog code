@@ -1,0 +1,18 @@
+module ring_counter (
+    input clock,
+    input reset,
+    output reg [3:0] Q
+);
+
+    always @(posedge clock) 
+	begin
+        if (reset) 
+		begin
+            Q<= 4'b1000;
+        end 
+		else 
+		begin
+            Q <= {Q[0], Q[3:1]}; // shift left & wrap
+        end
+    end
+endmodule
