@@ -1,0 +1,27 @@
+module Johnson_counter_tb();
+reg clk;
+reg reset;
+wire [3:0] q; 
+
+Johnson_counter DUT(.clk(clk),.reset(reset),.q(q));
+
+initial 
+begin
+	clk=1'b1;
+	forever #5 clk=~clk;
+end
+
+initial 
+begin
+	reset=1;
+	#20;
+	reset=0;
+	#200;
+	$finish;
+end
+
+initial
+begin 
+	$monitor("value of q=%b",q);
+end
+endmodule
