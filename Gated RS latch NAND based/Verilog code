@@ -1,0 +1,16 @@
+module Gated_RS_latch(input S,input R,input En,output Q,output Qn); 
+	wire S_g, R_g, Q_int, Qn_int; 
+	assign S_g = ~(S & En); 
+	assign R_g = ~(R & En); 
+	
+	//module instantiation
+	NAND_Gate NAND1(.A(S_g),.B(Qn_int),.Y(Q_int));
+	NAND_Gate NAND2(.A(R_g),.B(Q_int),.Y(Qn_int)); 
+	
+	assign Q = Q_int; 
+	assign Qn = Qn_int;
+endmodule
+
+module NAND_Gate(input A,input B,output Y ); 
+	assign Y = ~(A & B); 
+endmodule 
