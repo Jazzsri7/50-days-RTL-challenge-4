@@ -1,0 +1,47 @@
+module Gated_RS_latch_tb(); 
+reg S; 
+reg R;
+reg En; 
+wire Q;  
+wire Qn; 
+ 
+Gated_RS_latch DUT (.En(En),.S(S),.R(R),.Q(Q),.Qn(Qn)); 
+
+initial 
+begin 
+	$monitor("Time = %0d, En=%b, S = %b, R = %b, Q = %b, Qn = %b", $time, En, S, R, Q, Qn); 
+	//Initial state
+	S = 0; 
+	R = 0; 
+	En = 0; #10; 
+	// Set Q to 1 
+	S = 1; 
+	R = 0; 
+	En = 1; #10; 
+	// Reset Q to 0 
+	S = 0; 
+	R = 1; 
+	En = 1; #10; 
+	// Invalid state
+	S = 1; 
+	R = 1; 
+	En = 1; #10; 
+	// No change
+	S = 0; 
+	R = 0; 
+	En = 1; #10; 
+	// En is low, no change
+	S = 1; 
+	R = 0; 
+	En = 0; #10; 
+	// Set Q to 1 
+	S = 1; 
+	R = 0; 
+	En = 1; #10;  
+	// En is low, no change
+	S = 1; 
+	R = 1; 
+	En = 0; #10
+ $finish;
+end
+endmodule
