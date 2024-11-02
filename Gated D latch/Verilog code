@@ -1,0 +1,30 @@
+module Gated_D_latch (input D,input En,output Q,output Qn);
+    wire S, R;
+	
+    assign S = ~(D & En);  
+    assign R = ~(~D & En); 
+
+    // Instantiate the NAND-based SR Latch
+    NAND_SR_Latch sr_latch (.S(S),.R(R),.Q(Q),.Qn(Qn));
+endmodule
+    
+module NAND_SR_Latch (
+    input S,
+    input R,
+    output Q,
+    output Qn
+);
+    wire Q_int, Qn_int;
+
+    NAND_Gate NAND1 (.A(S), .B(Qn_int), .Y(Q_int));
+    NAND_Gate NAND2 (.A(R), .B(Q_int), .Y(Qn_int));
+
+    assign Q = Q_int;
+    assign Qn = Qn_int;
+endmodule
+
+
+// NAND gate logic
+module NAND_Gate (input A,input B,output Y);
+    assign Y = ~(A & B); 
+endmodule
