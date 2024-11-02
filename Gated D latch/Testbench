@@ -1,0 +1,36 @@
+module Gated_D_latch_tb(); 
+reg D; 
+reg En; 
+wire Q;  
+wire Qn; 
+ 
+Gated_D_latch DUT (.En(En),.D(D),.Q(Q),.Qn(Qn)); 
+
+initial 
+begin 
+	$monitor("Time = %0d, En=%b, D = %b, Q = %b, Qn = %b", $time, En, D, Q, Qn); 
+	
+	D = 0; 
+	En = 0; #10; 
+	
+	D = 1;  
+	En = 1; #10; 
+	
+	D = 0;  
+	En = 1; #10; 
+	
+	D = 1; 
+	En = 1; #10; 
+	
+	D = 0;  
+	En = 1; #10; 
+	
+	D = 1;
+	En = 0; #10; 
+	
+	D = 1; 
+	En = 1; #10;  
+	
+ $finish;
+end
+endmodule
